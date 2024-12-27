@@ -1,0 +1,13 @@
+server:
+  port: @server.port@
+
+spring:
+  application:
+    name: learn-english
+  jpa:
+    database: postgresql
+    show-sql: true
+  datasource:
+    username: admin
+    password: admin
+    url: jdbc:postgresql://localhost:5432/learnenglish

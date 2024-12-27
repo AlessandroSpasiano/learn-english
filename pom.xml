@@ -10,7 +10,7 @@
     </parent>
     <groupId>it.alexs</groupId>
     <artifactId>learn-english</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>learn-english</name>
     <description>learn-english</description>
     <url/>
@@ -29,6 +29,7 @@
     <properties>
         <java.version>17</java.version>
         <kotlin.version>1.9.25</kotlin.version>
+        <server.port>8080</server.port>
     </properties>
     <dependencies>
         <dependency>
