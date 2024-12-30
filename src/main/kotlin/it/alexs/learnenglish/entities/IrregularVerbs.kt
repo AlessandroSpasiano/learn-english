@@ -1,5 +1,6 @@
 package it.alexs.learnenglish.entities
 
+import it.alexs.learnenglish.model.IrregularVerbsResponse
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -15,4 +16,12 @@ class IrregularVerbs(
     val pastSimple: String,
     val pastParticiple: String,
     val definition: String
+)
+
+
+fun IrregularVerbs.toResponse() = IrregularVerbsResponse(
+    id = id,
+    baseForm = baseForm,
+    pastSimple = pastSimple,
+    pastParticiple = pastParticiple
 )
