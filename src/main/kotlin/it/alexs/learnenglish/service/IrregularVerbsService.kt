@@ -12,4 +12,8 @@ class IrregularVerbsService(
     fun list(): List<IrregularVerbs> {
         return irregularVerbsRepository.findAll()
     }
+
+    fun getById(id: Long): IrregularVerbs {
+        return irregularVerbsRepository.findById(id).orElseThrow { IllegalArgumentException("Invalid id") }
+    }
 }
