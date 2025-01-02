@@ -1,5 +1,8 @@
 package it.alexs.learnenglish.utils
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatterBuilder
 import java.time.temporal.ChronoField
@@ -18,4 +21,16 @@ private val LOCAL_DATE_TIME_FORMAT = DateTimeFormatterBuilder()
 
 fun LocalDateTime.asLocal(): String {
     return this.format(LOCAL_DATE_TIME_FORMAT)
+}
+
+fun asJsonString(obj: Any): String {
+    val mapper = jacksonObjectMapper()
+    return mapper.writeValueAsString(obj)
+}
+
+inline fun <reified T> fromJsonString(json: String): T {
+    val mapper = jacksonObjectMapper()
+    val result: T = mapper.readValue(json)
+
+    return result
 }
