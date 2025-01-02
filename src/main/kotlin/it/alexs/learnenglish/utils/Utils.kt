@@ -1,8 +1,9 @@
 package it.alexs.learnenglish.utils
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import it.alexs.learnenglish.exceptions.LearnEnglishBadRequest
+import it.alexs.learnenglish.exceptions.LearnEnglishException
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatterBuilder
 import java.time.temporal.ChronoField
@@ -33,4 +34,10 @@ inline fun <reified T> fromJsonString(json: String): T {
     val result: T = mapper.readValue(json)
 
     return result
+}
+
+fun assertOrBadRequest(condition: Boolean, message: String) {
+    if (!condition) {
+        throw LearnEnglishBadRequest(message)
+    }
 }

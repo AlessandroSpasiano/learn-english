@@ -10,4 +10,4 @@ spring:
   datasource:
     username: admin
     password: admin
-    url: jdbc:postgresql://localhost:5432/learnenglish
+    url: jdbc:postgresql://localhost:5439/learnenglish

@@ -2,6 +2,7 @@ package it.alexs.learnenglish.service
 
 import it.alexs.learnenglish.entities.Session
 import it.alexs.learnenglish.entities.SessionCheck
+import it.alexs.learnenglish.exceptions.LearnEnglishNotFound
 import it.alexs.learnenglish.model.DetailAnswer
 import it.alexs.learnenglish.model.Result
 import it.alexs.learnenglish.model.SessionCheckRequest
@@ -22,7 +23,7 @@ class SessionService(
     }
 
     fun findById(sessionId: Long): Session {
-        return sessionRepository.findById(sessionId).orElseThrow { IllegalArgumentException("Invalid id") }
+        return sessionRepository.findById(sessionId).orElseThrow { LearnEnglishNotFound("Session id $sessionId not found") }
     }
 
     fun createNewSessionCheck(session: Session): List<SessionCheck> {
@@ -49,7 +50,7 @@ class SessionService(
 
     fun updateSessionCheck(sessionId: Long, sessionCheckRequest: SessionCheckRequest): SessionCheck {
         return sessionCheckRepository.findById(sessionId)
-            .orElseThrow { IllegalArgumentException("Invalid id") }
+            .orElseThrow { LearnEnglishNotFound("Session id $sessionId not found") }
             .copy(
                 answerPastSimple = sessionCheckRequest.answerPastSimple,
                 answerPastParticiple = sessionCheckRequest.answerPastParticiple

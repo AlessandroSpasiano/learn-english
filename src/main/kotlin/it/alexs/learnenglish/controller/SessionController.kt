@@ -3,13 +3,10 @@ package it.alexs.learnenglish.controller
 import it.alexs.learnenglish.entities.toResponse
 import it.alexs.learnenglish.model.*
 import it.alexs.learnenglish.service.SessionService
-import jakarta.websocket.server.PathParam
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import it.alexs.learnenglish.utils.assertOrBadRequest
+import jakarta.validation.Valid
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class SessionController(
@@ -17,13 +14,13 @@ class SessionController(
 ) {
 
     @PostMapping("/session")
-    fun newSession(@RequestBody body: SessionRequest): List<SessionCheckResponse> {
-        if (!body.isValid()) {
-            throw IllegalArgumentException("Invalid request")
-        }
+    fun newSession(@RequestBody body: SessionRequest): ResponseEntity<List<SessionCheckResponse>> {
+        assertOrBadRequest(body.isValid(), "Invalid request body")
 
-        return sessionService.createSession(body.toEntity())
+        val session = sessionService.createSession(body.toEntity())
             .map { it.toResponse() }
+
+        return ResponseEntity.ok(session)
     }
 
     @PutMapping("/session/{id}")
